@@ -1,0 +1,60 @@
+<!-- ManageMinutesWindow.xaml -->
+<Window x:Class="HabitTracker.ManageMinutesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Manage Available Minutes" Height="600" Width="800"
+        WindowStartupLocation="CenterOwner">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0" Text="Manage Available Minutes" FontSize="24" Margin="0,0,0,20"/>
+
+        <!-- Add New Entry -->
+        <Grid Grid.Row="1" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Content="Date:" VerticalAlignment="Center"/>
+            <DatePicker Grid.Column="1" x:Name="NewDatePicker" Margin="5"/>
+            <Label Grid.Column="2" Content="Minutes:" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="3" x:Name="NewMinutesTextBox" Margin="5"/>
+            <Button Grid.Column="4" Content="Add" Width="80" Margin="5" Click="AddEntry_Click"/>
+        </Grid>
+
+        <!-- Minutes List -->
+        <DataGrid Grid.Row="2" x:Name="MinutesGrid" AutoGenerateColumns="False" 
+                  CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Date" Binding="{Binding Key}" Width="200"/>
+                <DataGridTextColumn Header="Minutes" Binding="{Binding Value}" Width="100"/>
+                <DataGridTemplateColumn Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete" Click="DeleteEntry_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" 
+                    Margin="0,20,0,0">
+            <Button Content="Close" Width="100" Height="30" Margin="0,0,10,0" 
+                    Click="Close_Click"/>
+            <Button Content="Save" Width="100" Height="30" Background="#4CAF50" 
+                    Foreground="White" Click="Save_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
